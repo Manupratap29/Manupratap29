@@ -1,16 +1,33 @@
-## Hi there 👋
+# Manu Pratap Singh Tanwar
 
-<!--
-**Manupratap29/Manupratap29** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+AI Systems Builder | Python | Automation | Web Development
 
-Here are some ideas to get you started:
+Currently exploring the intersection of AI systems, automation, and digital products.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## What I'm Working On
+
+- AI experiments and automation workflows
+- Python fundamentals for AI/ML systems
+- Web development and interactive experiences
+- AI-powered marketing systems
+
+## Projects
+
+### Curious Cubs Innovation – AI Operations System
+Designed the operational architecture for an AI-powered consultancy system integrating R&D AI agents, blog automation, and marketing workflows.
+
+### Portify – Portfolio Website Platform
+Building personal portfolio websites to help creators and professionals establish a strong digital presence.
+
+### Growady – AI Marketing Automation
+Developing AI-powered marketing workflows and content automation systems.
+
+### Computer Vision Web Demo
+Explored MediaPipe hand-tracking to build interactive browser-based gesture experiences.
+
+## Current Learning
+
+- Python
+- AI systems
+- Automation workflows
+- Product building
