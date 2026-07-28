@@ -1,170 +1,84 @@
-"""
-Banner generator — source of truth (per master prompt: keep this + dotmask.npy,
-the SVG is a build artifact).
+<div align="center">
 
-Usage: python3 gen_banner.py dark|light
-"""
-import sys, json, random
-import numpy as np
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/light.svg">
+  <img alt="Manu Pratap — banner" src="./assets/light.svg">
+</picture>
 
-GW, GH = 300, 340
-mask = np.load('/home/claude/dotmask.npy')  # (340,300) bool
-assert mask.shape == (GH, GW)
+<br>
 
-theme = sys.argv[1] if len(sys.argv) > 1 else 'dark'
+<a href="https://linkedin.com/in/manupratap29-dummy"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>&nbsp;&nbsp;<a href="https://instagram.com/manupratap29-dummy"><img src="https://img.shields.io/badge/Instagram-0A101F?style=for-the-badge&logo=instagram&logoColor=E4405F" /></a>&nbsp;&nbsp;<a href="https://facebook.com/manupratap29-dummy"><img src="https://img.shields.io/badge/Facebook-0A101F?style=for-the-badge&logo=facebook&logoColor=1877F2" /></a>&nbsp;&nbsp;<a href="mailto:manu@dummy-mail.com"><img src="https://img.shields.io/badge/Email-0A101F?style=for-the-badge&logo=gmail&logoColor=EA4335" /></a>&nbsp;&nbsp;<a href="https://portify-dummy.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0A101F?style=for-the-badge&logo=vercel&logoColor=A78BFA" /></a>
 
-THEMES = {
-    'dark': dict(
-        bg='#0A101F', panel='#0D1424', chrome='#22D3EE', chrome_dim='#0891B2',
-        portrait='#A78BFA', accent='#10B981', text='#C9D3E8', text_dim='#5B6786',
-        titlebar='#111A2E', border='#1C2740'
-    ),
-    'light': dict(
-        bg='#F5F3FF', panel='#FFFFFF', chrome='#0891B2', chrome_dim='#22D3EE',
-        portrait='#7C3AED', accent='#059669', text='#1E2233', text_dim='#8A93AC',
-        titlebar='#EDE9FE', border='#DDD6FE'
-    ),
-}
-C = THEMES[theme]
+</div>
 
-W, H = 1180, 610
-TITLEBAR_H = 34
-CONTENT_Y = TITLEBAR_H
-CONTENT_H = H - TITLEBAR_H
+<br>
 
-# ---- portrait panel geometry ----
-PORT_X, PORT_Y, PORT_W, PORT_H = 46, CONTENT_Y + 46, 372, 422
-px_pitch = PORT_W / GW
-py_pitch = PORT_H / GH
-dot_s = min(px_pitch, py_pitch) * 0.86
+## About
 
-random.seed(7)
-N_GROUPS = 16
-ys, xs = np.where(mask)
-order = list(range(len(xs)))
-random.shuffle(order)
-groups = [[] for _ in range(N_GROUPS)]
-for i, idx in enumerate(order):
-    groups[i % N_GROUPS].append(idx)
+AI Engineer and founder based in Jaipur, India, currently pursuing a BCA at Poornima University (2025–2028). I build production AI systems end to end — from computer vision pipelines to automation platforms shipped to paying clients — and hold Anthropic Academy certifications in agentic AI development.
 
-def dots_path(idx_list):
-    parts = []
-    for i in idx_list:
-        gy, gx = ys[i], xs[i]
-        x = PORT_X + gx * px_pitch + (px_pitch - dot_s) / 2
-        y = PORT_Y + gy * py_pitch + (py_pitch - dot_s) / 2
-        parts.append(f"M{x:.2f},{y:.2f}h{dot_s:.2f}v{dot_s:.2f}h{-dot_s:.2f}z")
-    return ''.join(parts)
+## Ventures
 
-portrait_layers = []
-stagger = 2.0 / N_GROUPS
-for gi, g in enumerate(groups):
-    d = dots_path(g)
-    begin = gi * stagger
-    portrait_layers.append(f'''
-    <path shape-rendering="crispEdges" fill="{C['portrait']}" opacity="0" d="{d}">
-      <animate attributeName="opacity" values="0;1" dur="0.6s" begin="{begin:.3f}s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
-    </path>''')
+**[Portify](https://portify-dummy.vercel.app)** — AI portfolio engine. Founder.
+Automated portfolio generation with production-grade Framer components, including an interactive particle-portrait system and a liquid-mask cursor reveal.
 
-# ambient shimmer loop: a rotating ~4% subset gently pulses, staggered, endless
-shimmer_subset = [i for n, i in enumerate(order) if n % 23 == 0]
-random.shuffle(shimmer_subset)
-chunks = [shimmer_subset[i::6] for i in range(6)]
-shimmer_layers = []
-for ci, chunk in enumerate(chunks):
-    d = dots_path(chunk)
-    beg = 3.4 + ci * 0.9
-    shimmer_layers.append(f'''
-    <path shape-rendering="crispEdges" fill="{C['portrait']}" opacity="1" d="{d}">
-      <animate attributeName="opacity" values="1;0.35;1" dur="5.4s" begin="{beg:.2f}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
-    </path>''')
+**Growady** — AI marketing automation for local service businesses. Co-founder.
+Missed-call text-back, AI appointment reminders, lead follow-up, review automation, and reactivation campaigns. Built on GoHighLevel, n8n, Twilio, Voiceflow, and Bland AI.
 
-# ---- info panel ----
-INFO_X = PORT_X + PORT_W + 48
-INFO_Y = CONTENT_Y + 40
-ROW_H = 23
+## Selected Projects
 
-rows = [
-    ("Subject", "Manu Pratap"),
-    ("Role", "AI Engineer"),
-    ("Origin", "Jaipur, India"),
-    ("Education", "BCA · Poornima University"),
-    ("Status", "Building + Learning + Shipping"),
-    ("ToolChain", "VS Code, Git, Claude Code, n8n"),
-    ("Core.Lang", "Python, JavaScript"),
-    ("Core.Frontend", "React, Framer"),
-    ("Core.Backend", "Node.js, n8n"),
-    ("Core.AI/ML", "Claude API, OpenCV, MediaPipe"),
-    ("Core.Infra", "Vercel, GoHighLevel"),
-    ("Grid.Mail", "manu@example.com"),
-    ("Grid.Portfolio", "portify.example.com"),
-    ("Grid.LinkedIn", "linkedin.com/in/manupratap29"),
-    ("Grid.GitHub", "github.com/Manupratap29"),
-    ("Grid.Facebook", "facebook.com/manupratap29"),
-]
+| Project | Description | Stack |
+|---|---|---|
+| **FaceRead** | Facial Emotion Recognition system, built as a team lead project at Poornima University | YOLOv5, FER2013 |
+| **AI Operations System** | Operations tooling built for Curious Cubs Innovation | Claude API, n8n |
+| **CV Gesture Demo** | Real-time hand-gesture recognition demo | Python, OpenCV, MediaPipe |
 
-def esc(s):
-    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+## Certifications
 
-row_svgs = []
-label_w = 150
-val_x_end = W - 56
-for i, (label, value) in enumerate(rows):
-    y = INFO_Y + 26 + i * ROW_H
-    label = esc(label); value = esc(value)
-    leader_start = INFO_X + label_w
-    leader_end = val_x_end - (len(value) * 6.6 + 8)
-    leader_end = max(leader_end, leader_start + 10)
-    dot_count = max(int((leader_end - leader_start) / 6), 0)
-    leader = '.' * dot_count
-    row_svgs.append(f'''
-    <text x="{INFO_X}" y="{y}" font-family="'JetBrains Mono','Fira Code',monospace" font-size="14" fill="{C['text_dim']}">{label}</text>
-    <text x="{leader_start+6}" y="{y}" font-family="'JetBrains Mono',monospace" font-size="14" fill="{C['border']}">{leader}</text>
-    <text x="{val_x_end}" y="{y}" text-anchor="end" font-family="'JetBrains Mono','Fira Code',monospace" font-size="14" fill="{C['text']}" textLength="{len(value)*6.6:.1f}" lengthAdjust="spacingAndGlyphs">{value}</text>''')
+Anthropic Academy — AI Fluency for Students · Introduction to Agent Skills · Claude Code in Action · Introduction to Subagents
 
-svg = f'''<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="rounded-{theme}"><rect x="0" y="0" width="{W}" height="{H}" rx="14"/></clipPath>
-    <clipPath id="portrait-clip-{theme}"><rect x="{PORT_X}" y="{PORT_Y}" width="{PORT_W}" height="{PORT_H}" rx="6"/></clipPath>
-  </defs>
-  <g clip-path="url(#rounded-{theme})">
-    <rect x="0" y="0" width="{W}" height="{H}" fill="{C['bg']}"/>
-    <rect x="0" y="0" width="{W}" height="{H}" fill="none" stroke="{C['border']}" stroke-width="1.5"/>
+## Stack
 
-    <!-- title bar -->
-    <rect x="0" y="0" width="{W}" height="{TITLEBAR_H}" fill="{C['titlebar']}"/>
-    <line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{C['border']}" stroke-width="1"/>
-    <circle cx="20" cy="{TITLEBAR_H/2}" r="5.5" fill="#FF5F56"/>
-    <circle cx="40" cy="{TITLEBAR_H/2}" r="5.5" fill="#FFBD2E"/>
-    <circle cx="60" cy="{TITLEBAR_H/2}" r="5.5" fill="#27C93F"/>
-    <text x="{W/2}" y="{TITLEBAR_H/2+4.5}" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="{C['text_dim']}">profile.sh --live</text>
+<div align="center">
 
-    <!-- portrait frame -->
-    <text x="{PORT_X}" y="{PORT_Y-18}" font-family="'JetBrains Mono',monospace" font-size="13" letter-spacing="2" fill="{C['chrome']}">VISUAL.MAP</text>
-    <rect x="{PORT_X-1}" y="{PORT_Y-1}" width="{PORT_W+2}" height="{PORT_H+2}" fill="none" stroke="{C['border']}" stroke-width="1.5" rx="6"/>
-    <g clip-path="url(#portrait-clip-{theme})">
-      <rect x="{PORT_X}" y="{PORT_Y}" width="{PORT_W}" height="{PORT_H}" fill="{C['panel']}"/>
-      <g>{''.join(portrait_layers)}</g>
-      <g>{''.join(shimmer_layers)}</g>
-    </g>
+![Python](https://img.shields.io/badge/Python-0A101F?style=for-the-badge&logo=python&logoColor=3776AB)
+![JavaScript](https://img.shields.io/badge/JavaScript-0A101F?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React](https://img.shields.io/badge/React-0A101F?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Framer](https://img.shields.io/badge/Framer-0A101F?style=for-the-badge&logo=framer&logoColor=0055FF)
+![Node.js](https://img.shields.io/badge/Node.js-0A101F?style=for-the-badge&logo=node.js&logoColor=339933)
+![n8n](https://img.shields.io/badge/n8n-0A101F?style=for-the-badge&logo=n8n&logoColor=EA4B71)
+![OpenCV](https://img.shields.io/badge/OpenCV-0A101F?style=for-the-badge&logo=opencv&logoColor=5C3EE8)
+![Vercel](https://img.shields.io/badge/Vercel-0A101F?style=for-the-badge&logo=vercel&logoColor=A78BFA)
+![Claude](https://img.shields.io/badge/Claude_API-0A101F?style=for-the-badge&logo=anthropic&logoColor=D4A27F)
 
-    <!-- info panel -->
-    <text x="{INFO_X}" y="{INFO_Y}" font-family="'JetBrains Mono',monospace" font-size="13" letter-spacing="2" fill="{C['chrome']}">SYSTEM.INFO</text>
-    <circle cx="{W-140}" cy="{INFO_Y-4}" r="4" fill="#FF5F56">
-      <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
-    </circle>
-    <text x="{W-130}" y="{INFO_Y}" font-family="'JetBrains Mono',monospace" font-size="12" letter-spacing="1.5" fill="#FF5F56">LIVE</text>
+</div>
 
-    {''.join(row_svgs)}
+## Stats
 
-    <!-- handle pill -->
-    <rect x="{INFO_X}" y="{INFO_Y + 26 + len(rows)*ROW_H + 14}" width="210" height="30" rx="15" fill="{C['titlebar']}" stroke="{C['chrome_dim']}" stroke-width="1"/>
-    <circle cx="{INFO_X+18}" cy="{INFO_Y + 26 + len(rows)*ROW_H + 29}" r="4" fill="{C['accent']}"/>
-    <text x="{INFO_X+32}" y="{INFO_Y + 26 + len(rows)*ROW_H + 34}" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="{C['text']}">@Manupratap29</text>
-  </g>
-</svg>'''
+<div align="center">
 
-out_path = f'/home/claude/build/{theme}.svg'
-with open(out_path, 'w') as f:
-    f.write(svg)
-print('wrote', out_path, 'size_kb=', len(svg)/1024)
+<img src="https://github-readme-stats-dummy.vercel.app/api/streak/?user=Manupratap29&theme=dark&hide_border=true&background=0A101F&stroke=22D3EE&ring=A78BFA&fire=10B981&currStreakLabel=A78BFA" width="100%" />
+
+<img src="https://github-readme-stats-dummy.vercel.app/api?username=Manupratap29&show_icons=true&theme=dark&hide_border=true&bg_color=0A101F&title_color=22D3EE&icon_color=10B981&text_color=C9D3E8&hide_rank=true" width="49%" />
+<img src="https://github-readme-stats-dummy.vercel.app/api/top-langs/?username=Manupratap29&layout=compact&theme=dark&hide_border=true&bg_color=0A101F&title_color=22D3EE&text_color=C9D3E8" width="49%" />
+
+</div>
+
+## Contribution Snake
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Manupratap29/Manupratap29/output/snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Manupratap29/Manupratap29/output/snake-light.svg">
+  <img alt="contribution snake" src="https://raw.githubusercontent.com/Manupratap29/Manupratap29/output/snake-dark.svg" />
+</picture>
+
+</div>
+
+<br>
+
+<div align="center">
+<sub>Banner portrait rendered as a dot-density silhouette from a single source photo — Python (Pillow/NumPy/SciPy), Floyd–Steinberg serpentine dithering, ordered-halftone fill.</sub>
+</div>
