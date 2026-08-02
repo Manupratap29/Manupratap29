@@ -8,7 +8,7 @@
 
 <br>
 
-<a href="https://linkedin.com/in/manupratap29-dummy"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>&nbsp;&nbsp;<a href="https://instagram.com/manupratap29-dummy"><img src="https://img.shields.io/badge/Instagram-0A101F?style=for-the-badge&logo=instagram&logoColor=E4405F" /></a>&nbsp;&nbsp;<a href="https://facebook.com/manupratap29-dummy"><img src="https://img.shields.io/badge/Facebook-0A101F?style=for-the-badge&logo=facebook&logoColor=1877F2" /></a>&nbsp;&nbsp;<a href="mailto:manu@dummy-mail.com"><img src="https://img.shields.io/badge/Email-0A101F?style=for-the-badge&logo=gmail&logoColor=EA4335" /></a>&nbsp;&nbsp;<a href="https://portify-dummy.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0A101F?style=for-the-badge&logo=vercel&logoColor=A78BFA" /></a>
+<a href="www.linkedin.com/in/manu-pratap-singh-tanwar-5b558b313"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>&nbsp;&nbsp;<a href="mailto:mpstanwar29@gmail.com"><img src="https://img.shields.io/badge/Email-0A101F?style=for-the-badge&logo=gmail&logoColor=EA4335" /></a>&nbsp;&nbsp;<a href="https://manu-portfolio.framer.website"><img src="https://img.shields.io/badge/Portfolio-0A101F?style=for-the-badge&logo=vercel&logoColor=A78BFA" /></a>
 
 </div>
 
@@ -19,9 +19,6 @@
 AI Engineer and founder based in Jaipur, India, currently pursuing a BCA at Poornima University (2025–2028). I build production AI systems end to end — from computer vision pipelines to automation platforms shipped to paying clients — and hold Anthropic Academy certifications in agentic AI development.
 
 ## Ventures
-
-**[Portify](https://portify-dummy.vercel.app)** — AI portfolio engine. Founder.
-Automated portfolio generation with production-grade Framer components, including an interactive particle-portrait system and a liquid-mask cursor reveal.
 
 **Growady** — AI marketing automation for local service businesses. Co-founder.
 Missed-call text-back, AI appointment reminders, lead follow-up, review automation, and reactivation campaigns. Built on GoHighLevel, n8n, Twilio, Voiceflow, and Bland AI.
