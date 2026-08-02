@@ -63,7 +63,7 @@ Designed and built the company website on Framer (full site structure and UX); b
 **Poornima University** — Bachelor of Computer Applications (BCA), 2025–2028, Jaipur, India
 
 **Languages** — English (Duolingo English Test: 129) · Hindi (Native) · German (CEFR A1)
-
+<!--
 ## Stats
 
 <div align="center">
@@ -80,3 +80,4 @@ Designed and built the company website on Framer (full site structure and UX); b
 <div align="center">
 <sub>Banner portrait rendered as a dot-density silhouette from a single source photo — Python (Pillow/NumPy/SciPy), Floyd–Steinberg serpentine dithering, ordered-halftone fill.</sub>
 </div>
+-->
