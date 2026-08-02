@@ -1,5 +1,3 @@
-<img width="1350" height="750" alt="01_sales_profit_by_region" src="https://github.com/user-attachments/assets/e646e16b-d83a-4b4d-8758-67f1812a2b4e" /><div align="center">
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/light.svg">
