@@ -1,4 +1,4 @@
-<div align="center">
+<img width="1350" height="750" alt="01_sales_profit_by_region" src="https://github.com/user-attachments/assets/e646e16b-d83a-4b4d-8758-67f1812a2b4e" /><div align="center">
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/dark.svg">
@@ -27,6 +27,7 @@ Missed-call text-back, AI appointment reminders, lead follow-up, review automati
 
 | Project | Description | Stack |
 |---|---|---|
+| **Superstore** | SQL and Python powered retail sales analytics with business insights dashboard | SQL, Python |
 | **FaceRead** | Facial Emotion Recognition system, built as a team lead project at Poornima University | YOLOv5, FER2013 |
 | **AI Operations System** | Operations tooling built for Curious Cubs Innovation | Claude API, n8n |
 | **CV Gesture Demo** | Real-time hand-gesture recognition demo | Python, OpenCV, MediaPipe |
@@ -34,6 +35,7 @@ Missed-call text-back, AI appointment reminders, lead follow-up, review automati
 ## Certifications
 
 Anthropic Academy — AI Fluency for Students · Introduction to Agent Skills · Claude Code in Action · Introduction to Subagents
+MongoDB - AI and Innovation, Building AI Agents with MongoDB, Building AI-Powered Search with MongoDB Vector Search, Building RAG Apps Using MongoDB, MongoDB Basics for Students
 
 ## Stack
 
